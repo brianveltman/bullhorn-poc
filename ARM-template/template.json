@@ -169,18 +169,6 @@
                               {
                                 "path": "/home/BullhornPoC/.ssh/authorized_keys",
                                 "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGe1fs5yCfLc47DNfbTu697D/2kxvhowTmcCutKYZuZu1o5fiKQ0YdTkQV1BuhWkqXJCGjlbPB8jvV8p3xacr6+mYOPmxc9F0lDpTSPrEAjXEgRnqT6su8V31YEQBw1x61EOP9zNOHy5oHXjXcKzF3xqR7EcVxztKiQ5jDhXHObSBbYFDV5xW5E+H8psZkDhxFzs68DpwnrZn1D3+slxUA9P1qrIeAS4DSO7MFVBDqMb9EQyqzsXcbPTQR41EZZtoNZX3RQ/c02IZ5zZ+D4w3S91lRXP6AAB9/W8VwLBRPOxFbmOVcG0/fp9vE8XUaPvYwBpKGvzbN/bkfsT553eO7 amynicolecorrelje@hotmail.com"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2AU5bASJxjyuDFlbf4LaofmD3wq789U48/FqJmPGpXMfkvw3AfcUeseyimqPfYiz3Y5RDbDdZZ5AvuDJhCOtAnXEA5/7CfaBy3Fc6i/g5bciFcjoqvO/TqJAW24CtdDraClFVCBXuEktQxMXkAly2dh19lzUeSVqgjCfdZHhY9WjTFjkqXOzzycrEfclFu8by4+4ZxeXblggQ09ij0Yxkod3sIFMdkmHfdwlqPhL/AU0IHMx1fLWj5prUIkubhj6zgSc0EPBUEujiN+nciBVujgwmx1XgMlCNuuW+rAE8ibeQGEA6SaK1KGhH9QXxciDNj90iVcD1sKoGARxWPfpiaYX25X4ry4Pb2QdSwbB8WLTjE+3bJW0sppKfyU7GjBXDley5W9NCHvUEcdpSddMxvoIQuw8ANO2LtE8ASszhprC4LMMQDMJTDZkQ3irCE5lFl6ZNd5vLrrgTEqmYzrM3bhg7GHO9s59fk3Tf9f/LDmmkaoLU70ucLqugpK0IpC/EYf4Yrdu+cybxfxc0GKPTxJPrevnTbUFfnvfUOsRhbLmmpF8xp6yCyX4Y8yf0j/SZ2Cl99mKNyAaYi4mOLpWZfqsZZgqRxkCeu2D8K6Mk2S9dTaoyXlC1YuY8UpzaCdxmwkHT+u30WnuRWGJMfYbKXkC0zsamlchr9fWi64mV1Q== marnixknoll@gmail.com"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDZPhL+r68aZkHgo/Tbn8O5dhNSZiRBo3r+KxySBATxPp0pyM99Kddd2vrddiyGsLiR8/mY72jH4+y8ThZNWiiVQLZWi55tuoEPDbHEi63ER5y49bUkmTyJhn/UDV3tC+bxN9kI/Rq6g/rpuPtQmalJruWS/bnpv6o632zTkJjz0Tmp0HPnqg57cRhu5MiNyU1/CHyMl+CuwtzzuYefo/Ju2RmtKau+FBt38469OD/bQ2A13LOMovi0CDbY0mvMUOBM2DvCIBhe9qh1SLVhmHJHgwdf9ONOPyn5n+v7jenPffIV0LGlnrhWKtllDgQdLf2yJ6dEbLIs+lgWWZ425EVnVeeAMZnNSgDi5UEfdcHATYMc6dymVGQRr4hAh/iXkFmTVTSCtGVDboThjMYLrlViAmas7b1tK4vZd81qyiN0P2tWmHBHcXGvCVmOCxhQy5TcWybrqn/2mfStyxvOXkTZ1D1Fdzkn1pzv8SFzbR7z+noUAAwAwr4ppsgfzqQRAGxjqOVq8UfjJvmOa/SqVL3ZP3r1Ynh6XWxVZ3czS24IFaw+B4/2CXVzx2+oEdIJdWeghmfN0vA4cM1Je7YBXeIyucdHJfLVTuwBzHaZuufCZ0Kz5XV8ye8qIbMGkTERaRrmCgNasvUeWR6SIrjdT8sPN0CsGXBlEZHkbHOhcylWBw== titus"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5ztnUmp/sULbRmpuPVgHFlJNlEc9X/hKVCmfVpZ7w1LjlWuQNkkE8VgBFtP3Q99XsXKcnFpPJ6znBnDfkwWJWZ0st3E/YC3EvmUzMDttvfSuffE3y1RW2ZOb5bq5Ft1RI9GL4kprFWijAzTviUFaPG+DosUoKSX/EbGZlZ8//BttfCmTIvl4qgS1btpn7orwRVNPpK7nWRXlTeyoBwAbAQeSIDYFEc0LvlcKqR/1BIuDPfvLlGeQSHo7kRmPYKuE5VWdqIzBnROtTCmIn5wUxdRvBPtHe/N0n/E11T/zUsAXzYymJ73X0pZuOlsEkivZ4U1nib+hHjzT2ycBYtpzyEAH/Kj44UgujaVxWpMKL3DkASmc1VBlWordJgNLapZ6k3u/2JGb86yiA6+yRnvu6eWhx8ofhdOTPxHDmok/uZFH/PcidgHJ5PUv7bzA0fW6U/xzYft3qnwn46VRlSk3E/lmx8kfY5hzhV9EvkA9NVeNxdG5e/KNzq5MMxXy8eOwZ/k6Gwf61ci01z7CyZ7F93zvoevKT1CYrwB8R+iw7HBz7j6e4cDuyylmplIgcb8GRlJBIF6xgWOKyX2elQX9DwAFbBQ9QITvDqx78rYABXboK3i2utE1YvUTHx86vH1+el8DCW2pWCmRWbdxGjY2QrLNAShyHTZ5P2aIoL6ExFQ== loekvanhaaster@hotmail.com"
                               }
                             ]							
                         },
@@ -267,7 +255,7 @@
         {
           "type": "Microsoft.Network/networkSecurityGroups/securityRules",
           "apiVersion": "2019-09-01",
-          "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/SSH')]",
+          "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/BullHornApp')]",
           "dependsOn": [
               "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
           ],
