@@ -1,6 +1,6 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
     "virtualMachines_BullHorn_name": {
       "defaultValue": "BullHorn",
@@ -23,328 +23,328 @@
       "type": "String"
     }
   },
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2019-09-01",
-            "name": "[parameters('networkSecurityGroups_BullHorn_nsg_name')]",
-            "location": "westeurope",
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2019-09-01",
+      "name": "[parameters('networkSecurityGroups_BullHorn_nsg_name')]",
+      "location": "westeurope",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "SSH",
             "properties": {
-                "securityRules": [
-                    {
-                        "name": "SSH",
-                        "properties": {
-                            "protocol": "TCP",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "22",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "*",
-                            "access": "Allow",
-                            "priority": 300,
-                            "direction": "Inbound",
-                            "sourcePortRanges": [],
-                            "destinationPortRanges": [],
-                            "sourceAddressPrefixes": [],
-                            "destinationAddressPrefixes": []
-                        }
-                    },
-                    {
-                        "name": "HTTPS",
-                        "properties": {
-                            "protocol": "TCP",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "443",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "*",
-                            "access": "Allow",
-                            "priority": 320,
-                            "direction": "Inbound",
-                            "sourcePortRanges": [],
-                            "destinationPortRanges": [],
-                            "sourceAddressPrefixes": [],
-                            "destinationAddressPrefixes": []
-                        }
-                    },
-                    {
-                        "name": "HTTP",
-                        "properties": {
-                            "protocol": "TCP",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "80",
-                            "sourceAddressPrefix": "*",
-                            "destinationAddressPrefix": "*",
-                            "access": "Allow",
-                            "priority": 340,
-                            "direction": "Inbound",
-                            "sourcePortRanges": [],
-                            "destinationPortRanges": [],
-                            "sourceAddressPrefixes": [],
-                            "destinationAddressPrefixes": []
-                        }
-                    }
-                ]
-            }
-        },
-        {
-            "type": "Microsoft.Network/publicIPAddresses",
-            "apiVersion": "2019-09-01",
-            "name": "[parameters('publicIPAddresses_BullHorn_ip_name')]",
-            "location": "westeurope",
-            "sku": {
-                "name": "Basic"
-            },
-            "properties": {
-                "ipAddress": "52.137.49.231",
-                "publicIPAddressVersion": "IPv4",
-                "publicIPAllocationMethod": "Dynamic",
-                "idleTimeoutInMinutes": 4,
-                "ipTags": []
-            }
-        },
-      {
-        "type": "Microsoft.Network/virtualNetworks",
-        "apiVersion": "2019-09-01",
-        "name": "[parameters('virtualNetworks_BullHorn_vnet_name')]",
-        "location": "westeurope",
-        "properties": {
-          "addressSpace": {
-            "addressPrefixes": [
-              "10.0.0.0/24"
-            ]
-          },
-          "subnets": [
-            {
-              "name": "default",
-              "properties": {
-                "addressPrefix": "10.0.0.0/24",
-                "delegations": [],
-                "privateEndpointNetworkPolicies": "Enabled",
-                "privateLinkServiceNetworkPolicies": "Enabled"
-              }
-            }
-          ],
-          "virtualNetworkPeerings": [],
-          "enableDdosProtection": false,
-          "enableVmProtection": false
-        }
-      },
-        {
-            "type": "Microsoft.Compute/virtualMachines",
-            "apiVersion": "2019-03-01",
-            "name": "[parameters('virtualMachines_BullHorn_name')]",
-            "location": "westeurope",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_bullhorn730_name'))]"
-            ],
-            "properties": {
-                "hardwareProfile": {
-                    "vmSize": "Standard_B2s"
-                },
-              "storageProfile": {
-                "imageReference": {
-                  "publisher": "Canonical",
-                  "offer": "UbuntuServer",
-                  "sku": "18.04-LTS",
-                  "version": "latest"
-                },
-                "osDisk": {
-                  "createOption": "FromImage"
-                },
-                "dataDisks": [
-                  {
-                    "diskSizeGB": 1023,
-                    "lun": 0,
-                    "createOption": "Empty"
-                  }
-                ]
-              },
-                "osProfile": {
-                    "computerName": "[parameters('virtualMachines_BullHorn_name')]",
-                    "adminUsername": "BullhornPoC",
-                    "linuxConfiguration": {
-                        "disablePasswordAuthentication": true,
-                        "ssh": {
-                            "publicKeys": [
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGe1fs5yCfLc47DNfbTu697D/2kxvhowTmcCutKYZuZu1o5fiKQ0YdTkQV1BuhWkqXJCGjlbPB8jvV8p3xacr6+mYOPmxc9F0lDpTSPrEAjXEgRnqT6su8V31YEQBw1x61EOP9zNOHy5oHXjXcKzF3xqR7EcVxztKiQ5jDhXHObSBbYFDV5xW5E+H8psZkDhxFzs68DpwnrZn1D3+slxUA9P1qrIeAS4DSO7MFVBDqMb9EQyqzsXcbPTQR41EZZtoNZX3RQ/c02IZ5zZ+D4w3S91lRXP6AAB9/W8VwLBRPOxFbmOVcG0/fp9vE8XUaPvYwBpKGvzbN/bkfsT553eO7 amynicolecorrelje@hotmail.com"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2AU5bASJxjyuDFlbf4LaofmD3wq789U48/FqJmPGpXMfkvw3AfcUeseyimqPfYiz3Y5RDbDdZZ5AvuDJhCOtAnXEA5/7CfaBy3Fc6i/g5bciFcjoqvO/TqJAW24CtdDraClFVCBXuEktQxMXkAly2dh19lzUeSVqgjCfdZHhY9WjTFjkqXOzzycrEfclFu8by4+4ZxeXblggQ09ij0Yxkod3sIFMdkmHfdwlqPhL/AU0IHMx1fLWj5prUIkubhj6zgSc0EPBUEujiN+nciBVujgwmx1XgMlCNuuW+rAE8ibeQGEA6SaK1KGhH9QXxciDNj90iVcD1sKoGARxWPfpiaYX25X4ry4Pb2QdSwbB8WLTjE+3bJW0sppKfyU7GjBXDley5W9NCHvUEcdpSddMxvoIQuw8ANO2LtE8ASszhprC4LMMQDMJTDZkQ3irCE5lFl6ZNd5vLrrgTEqmYzrM3bhg7GHO9s59fk3Tf9f/LDmmkaoLU70ucLqugpK0IpC/EYf4Yrdu+cybxfxc0GKPTxJPrevnTbUFfnvfUOsRhbLmmpF8xp6yCyX4Y8yf0j/SZ2Cl99mKNyAaYi4mOLpWZfqsZZgqRxkCeu2D8K6Mk2S9dTaoyXlC1YuY8UpzaCdxmwkHT+u30WnuRWGJMfYbKXkC0zsamlchr9fWi64mV1Q== marnixknoll@gmail.com"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDZPhL+r68aZkHgo/Tbn8O5dhNSZiRBo3r+KxySBATxPp0pyM99Kddd2vrddiyGsLiR8/mY72jH4+y8ThZNWiiVQLZWi55tuoEPDbHEi63ER5y49bUkmTyJhn/UDV3tC+bxN9kI/Rq6g/rpuPtQmalJruWS/bnpv6o632zTkJjz0Tmp0HPnqg57cRhu5MiNyU1/CHyMl+CuwtzzuYefo/Ju2RmtKau+FBt38469OD/bQ2A13LOMovi0CDbY0mvMUOBM2DvCIBhe9qh1SLVhmHJHgwdf9ONOPyn5n+v7jenPffIV0LGlnrhWKtllDgQdLf2yJ6dEbLIs+lgWWZ425EVnVeeAMZnNSgDi5UEfdcHATYMc6dymVGQRr4hAh/iXkFmTVTSCtGVDboThjMYLrlViAmas7b1tK4vZd81qyiN0P2tWmHBHcXGvCVmOCxhQy5TcWybrqn/2mfStyxvOXkTZ1D1Fdzkn1pzv8SFzbR7z+noUAAwAwr4ppsgfzqQRAGxjqOVq8UfjJvmOa/SqVL3ZP3r1Ynh6XWxVZ3czS24IFaw+B4/2CXVzx2+oEdIJdWeghmfN0vA4cM1Je7YBXeIyucdHJfLVTuwBzHaZuufCZ0Kz5XV8ye8qIbMGkTERaRrmCgNasvUeWR6SIrjdT8sPN0CsGXBlEZHkbHOhcylWBw== titus"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDW8xLSaawqBdbN1ZWbjFn6hlwSrKlXzYhP6MdhV3A2wPAcAbdjp9ivr2VutoMyZtYuY5FPuCUR2dE8afMgTjQvoEi1+tcOmGziIJPpDT/T5R2LSPe3e4Hx8es+dfY7HiZj3mBTimYPlrzYFlpQ34RzMircTolt7duZfvxfQzpRMfRbYRCRVfafEVsgSKxy9LPjoSB5OtKjoNGz2GdROIkzDdJAquXNW4WGVphjjl3BffR+MiD5U6M0Y9BO7Lpy6DbPI5bTEx+mdXmIMjO/Q1tYZDffraKjbPph9W2CWNgBEclmObNNkYnOJ4Iq2A5Fv3Xztd8MLbIboFUYgADxVhPMYMFdj/fI7xLnToi7L9XUJCvajSvJOrv465DwqMlwPSYuUF0WnDy+qn8B/q4jvGlXGgrRYuQv7xDoxAtSP5HTe6tPz0ukqe9b8/Kk1G5Zpw81ZP2rQ9pNkMQCojOpz0J9gZBpw2nX4oCD7mfRrdcoSbzgScqri5Fjw8kkyQmHklEqG48OIccGcK5zImqSFXHChQkLHB2sb3L/sXKlUMjyQzKL0Ndt0U9XlgibueXOAs7b+QG+6LY2U6Jp2mAXq3OPGWAjVP1O4sGoPA2YBBQDyAeoYZQ8LIWBO0yJVcyD/0D4PXp8nV1LVbHZp8MuabXvQUwEB1YH+xa8YxohTTe+fQ== loekvanhaaster@hotmail.com"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD2Psns14jLc06kmxUUgDXs7d2FiNv+DdQfMhaChKLlOWXTsIVAqUUs/WYze+2wDquahTGNfg2obdHC6W1Xm36q2grHmKaYKD+b8lqNiabgc8OVydlyXFv/jNnth/RVhdEAjy9Z0ZSo1qRT57OUyIdWK323wdgEkmEj16MfM0Zs1S36B/m4ZYzbSrwZfqatDoZqmceIM3vXY8ROPlw9sAJV2sIsafVtWgDBUdI8y7PXCAKocoQZfOviT0i93u4YyypYUFQwezwNFoQZ0SHJNCTvkF01x3EFGDqcEwytznQ8ajeTUKuFMrgL2DXc8tdB3RKnFVMGMk4FikdaLLdO0L/jZJLdS63bSw7MTkFJbCxK8doQJ71bASTBr3b6bd/XFVEQT5Hfgj0AwyA+t5B6rgbbPDUan0BnlpTOnOQddCgXd6txwZlqYcUPGlUFMKSjsrpUPVC+Uzf8CZ2zBmrWi3glu6Z+iShsOcRznIT/5XFKbSRMeRPT1IVO1ttO2340bes5y7hXVkLFiV/zPl2fdoZ+R2g1vCQqfjUWLh00pH0FtzuTRuHGNK8YXWgkcx3zHDNfcxl8CUOpbPAdrifKpy/nlq8rf5Bsh9QlcXswsq2BsNMnSR8SBLaTNrcGs2CIY5/0GpY9J58GQdldELkShmrKSwkqPuo6nEWd+i/PNOvCXw== jakobijn.strobbe@hotmail.com"
-                              },
-                              {
-                                "path": "/home/BullhornPoC/.ssh/authorized_keys",
-                                "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2GO25OtGZ5qygETvbdVFX3kA4+WGGLP4oLiYV50gfPoCQrLBdt11yNa7iX6Qvlbj84SUrKlMdTZ/sneHhDKiFX8y9USC5Njez/6wWm4ZazP54As/kq7Ya0k8BRZlYuJc5Eata/xFNJqaixF7VscqBgnm9+Gh37EAijeoy3MkYbx81rbGbYgcJ/9B9iuudJKHLWe1BAhuac8zBBbDYSky1MYcWagexzDe4UERPxFO4rvnRNLF4ccmtlAmxjWjeD9hxDgD0y4Elnkdu2iRdL6SC73QGELf4QvOVi6IN1XF6FYEPnsDzfkrbvF5sAfoN+ukrbL89vL7iOHL7NOsO8VC2fytC6fLGMKtI2HBJI/3uFeIj29zYwFbv5e27dJeeH+J5Jcw5aAbUu5eUyLN+sZtyPYAMn6rnws6y+C+VHTG5u7Hn8HY7go/BtpOQMZWwl0NshQKVWpGzzf3AIkA6tahGsRv0iuVuGtww0OoXfH7gzySALPV9JeZziL7RwT5yuc99D5AAaI8H0D+GRjpI7RoPdSFNBHJe0/150NWOXEUN58CKNzretTesalOK1eIzgGCW7kqYzvfowv5B6nf52rqJ+gC38oxwRUJwvpEVl8RLH2ojrCC2loEcBl/tFajytBdros/8nSHwmbHtHrDrxW+saAgZVXDW+ruaXRgS1L6YTQ== sjoerdboonstra_626@hotmail.com"
-                              }
-                            ]							
-                        },
-                        "provisionVMAgent": true
-                    },
-                    "secrets": [],
-                    "allowExtensionOperations": true
-                },
-                "networkProfile": {
-                    "networkInterfaces": [
-                        {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_bullhorn730_name'))]"
-                        }
-                    ]
-                }
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/HTTP')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
-            ],
-            "properties": {
-                "protocol": "TCP",
-                "sourcePortRange": "*",
-                "destinationPortRange": "80",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 340,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/HTTPS')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
-            ],
-            "properties": {
-                "protocol": "TCP",
-                "sourcePortRange": "*",
-                "destinationPortRange": "443",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 320,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-        },
-        {
-            "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-            "apiVersion": "2019-09-01",
-            "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/SSH')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
-            ],
-            "properties": {
-                "protocol": "TCP",
-                "sourcePortRange": "*",
-                "destinationPortRange": "22",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 300,
-                "direction": "Inbound",
-                "sourcePortRanges": [],
-                "destinationPortRanges": [],
-                "sourceAddressPrefixes": [],
-                "destinationAddressPrefixes": []
-            }
-        },
-        {
-          "type": "Microsoft.Network/networkSecurityGroups/securityRules",
-          "apiVersion": "2019-09-01",
-          "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/BullHornApp')]",
-          "dependsOn": [
-              "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
-          ],
-          "properties": {
               "protocol": "TCP",
               "sourcePortRange": "*",
-              "destinationPortRange": "4200",
+              "destinationPortRange": "22",
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "access": "Allow",
-              "priority": 360,
+              "priority": 300,
               "direction": "Inbound",
               "sourcePortRanges": [],
               "destinationPortRanges": [],
               "sourceAddressPrefixes": [],
               "destinationAddressPrefixes": []
-          }
-      },
-      {
-        "type": "Microsoft.Network/virtualNetworks/subnets",
-        "apiVersion": "2019-09-01",
-        "name": "[concat(parameters('virtualNetworks_BullHorn_vnet_name'), '/default')]",
-        "dependsOn": [
-          "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_BullHorn_vnet_name'))]"
-        ],
-        "properties": {
-          "addressPrefix": "10.0.0.0/24",
-          "delegations": [],
-          "privateEndpointNetworkPolicies": "Enabled",
-          "privateLinkServiceNetworkPolicies": "Enabled"
-        }
-      },
-        {
-            "type": "Microsoft.Network/networkInterfaces",
-            "apiVersion": "2019-09-01",
-            "name": "[parameters('networkInterfaces_bullhorn730_name')]",
-            "location": "westeurope",
-          "dependsOn": [
-            "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_BullHorn_ip_name'))]",
-            "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_BullHorn_vnet_name'), 'default')]",
-            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
-          ],
-            "properties": {
-                "ipConfigurations": [
-                    {
-                        "name": "ipconfig1",
-                        "properties": {
-                            "privateIPAddress": "10.0.0.4",
-                            "privateIPAllocationMethod": "Dynamic",
-                            "publicIPAddress": {
-                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_BullHorn_ip_name'))]"
-                            },
-                          "subnet": {
-                            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_BullHorn_vnet_name'), 'default')]"
-                          },
-                            "primary": true,
-                            "privateIPAddressVersion": "IPv4"
-                        }
-                    }
-                ],
-                "dnsSettings": {
-                    "dnsServers": []
-                },
-                "enableAcceleratedNetworking": false,
-                "enableIPForwarding": false,
-                "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
-                }
             }
+          },
+          {
+            "name": "HTTPS",
+            "properties": {
+              "protocol": "TCP",
+              "sourcePortRange": "*",
+              "destinationPortRange": "443",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 320,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          },
+          {
+            "name": "HTTP",
+            "properties": {
+              "protocol": "TCP",
+              "sourcePortRange": "*",
+              "destinationPortRange": "80",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 340,
+              "direction": "Inbound",
+              "sourcePortRanges": [],
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/publicIPAddresses",
+      "apiVersion": "2019-09-01",
+      "name": "[parameters('publicIPAddresses_BullHorn_ip_name')]",
+      "location": "westeurope",
+      "sku": {
+        "name": "Basic"
+      },
+      "properties": {
+        "ipAddress": "52.137.49.231",
+        "publicIPAddressVersion": "IPv4",
+        "publicIPAllocationMethod": "Dynamic",
+        "idleTimeoutInMinutes": 4,
+        "ipTags": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2019-09-01",
+      "name": "[parameters('virtualNetworks_BullHorn_vnet_name')]",
+      "location": "westeurope",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.0.0.0/24"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "default",
+            "properties": {
+              "addressPrefix": "10.0.0.0/24",
+              "delegations": [],
+              "privateEndpointNetworkPolicies": "Enabled",
+              "privateLinkServiceNetworkPolicies": "Enabled"
+            }
+          }
+        ],
+        "virtualNetworkPeerings": [],
+        "enableDdosProtection": false,
+        "enableVmProtection": false
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines",
+      "apiVersion": "2019-03-01",
+      "name": "[parameters('virtualMachines_BullHorn_name')]",
+      "location": "westeurope",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_bullhorn730_name'))]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "Standard_B2s"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "Canonical",
+            "offer": "UbuntuServer",
+            "sku": "18.04-LTS",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage"
+          },
+          "dataDisks": [
+            {
+              "diskSizeGB": 1023,
+              "lun": 0,
+              "createOption": "Empty"
+            }
+          ]
+        },
+        "osProfile": {
+          "computerName": "[parameters('virtualMachines_BullHorn_name')]",
+          "adminUsername": "BullhornPoC",
+          "linuxConfiguration": {
+            "disablePasswordAuthentication": true,
+            "ssh": {
+              "publicKeys": [
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGe1fs5yCfLc47DNfbTu697D/2kxvhowTmcCutKYZuZu1o5fiKQ0YdTkQV1BuhWkqXJCGjlbPB8jvV8p3xacr6+mYOPmxc9F0lDpTSPrEAjXEgRnqT6su8V31YEQBw1x61EOP9zNOHy5oHXjXcKzF3xqR7EcVxztKiQ5jDhXHObSBbYFDV5xW5E+H8psZkDhxFzs68DpwnrZn1D3+slxUA9P1qrIeAS4DSO7MFVBDqMb9EQyqzsXcbPTQR41EZZtoNZX3RQ/c02IZ5zZ+D4w3S91lRXP6AAB9/W8VwLBRPOxFbmOVcG0/fp9vE8XUaPvYwBpKGvzbN/bkfsT553eO7 amynicolecorrelje@hotmail.com"
+                },
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2AU5bASJxjyuDFlbf4LaofmD3wq789U48/FqJmPGpXMfkvw3AfcUeseyimqPfYiz3Y5RDbDdZZ5AvuDJhCOtAnXEA5/7CfaBy3Fc6i/g5bciFcjoqvO/TqJAW24CtdDraClFVCBXuEktQxMXkAly2dh19lzUeSVqgjCfdZHhY9WjTFjkqXOzzycrEfclFu8by4+4ZxeXblggQ09ij0Yxkod3sIFMdkmHfdwlqPhL/AU0IHMx1fLWj5prUIkubhj6zgSc0EPBUEujiN+nciBVujgwmx1XgMlCNuuW+rAE8ibeQGEA6SaK1KGhH9QXxciDNj90iVcD1sKoGARxWPfpiaYX25X4ry4Pb2QdSwbB8WLTjE+3bJW0sppKfyU7GjBXDley5W9NCHvUEcdpSddMxvoIQuw8ANO2LtE8ASszhprC4LMMQDMJTDZkQ3irCE5lFl6ZNd5vLrrgTEqmYzrM3bhg7GHO9s59fk3Tf9f/LDmmkaoLU70ucLqugpK0IpC/EYf4Yrdu+cybxfxc0GKPTxJPrevnTbUFfnvfUOsRhbLmmpF8xp6yCyX4Y8yf0j/SZ2Cl99mKNyAaYi4mOLpWZfqsZZgqRxkCeu2D8K6Mk2S9dTaoyXlC1YuY8UpzaCdxmwkHT+u30WnuRWGJMfYbKXkC0zsamlchr9fWi64mV1Q== marnixknoll@gmail.com"
+                },
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDZPhL+r68aZkHgo/Tbn8O5dhNSZiRBo3r+KxySBATxPp0pyM99Kddd2vrddiyGsLiR8/mY72jH4+y8ThZNWiiVQLZWi55tuoEPDbHEi63ER5y49bUkmTyJhn/UDV3tC+bxN9kI/Rq6g/rpuPtQmalJruWS/bnpv6o632zTkJjz0Tmp0HPnqg57cRhu5MiNyU1/CHyMl+CuwtzzuYefo/Ju2RmtKau+FBt38469OD/bQ2A13LOMovi0CDbY0mvMUOBM2DvCIBhe9qh1SLVhmHJHgwdf9ONOPyn5n+v7jenPffIV0LGlnrhWKtllDgQdLf2yJ6dEbLIs+lgWWZ425EVnVeeAMZnNSgDi5UEfdcHATYMc6dymVGQRr4hAh/iXkFmTVTSCtGVDboThjMYLrlViAmas7b1tK4vZd81qyiN0P2tWmHBHcXGvCVmOCxhQy5TcWybrqn/2mfStyxvOXkTZ1D1Fdzkn1pzv8SFzbR7z+noUAAwAwr4ppsgfzqQRAGxjqOVq8UfjJvmOa/SqVL3ZP3r1Ynh6XWxVZ3czS24IFaw+B4/2CXVzx2+oEdIJdWeghmfN0vA4cM1Je7YBXeIyucdHJfLVTuwBzHaZuufCZ0Kz5XV8ye8qIbMGkTERaRrmCgNasvUeWR6SIrjdT8sPN0CsGXBlEZHkbHOhcylWBw== titus"
+                },
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDW8xLSaawqBdbN1ZWbjFn6hlwSrKlXzYhP6MdhV3A2wPAcAbdjp9ivr2VutoMyZtYuY5FPuCUR2dE8afMgTjQvoEi1+tcOmGziIJPpDT/T5R2LSPe3e4Hx8es+dfY7HiZj3mBTimYPlrzYFlpQ34RzMircTolt7duZfvxfQzpRMfRbYRCRVfafEVsgSKxy9LPjoSB5OtKjoNGz2GdROIkzDdJAquXNW4WGVphjjl3BffR+MiD5U6M0Y9BO7Lpy6DbPI5bTEx+mdXmIMjO/Q1tYZDffraKjbPph9W2CWNgBEclmObNNkYnOJ4Iq2A5Fv3Xztd8MLbIboFUYgADxVhPMYMFdj/fI7xLnToi7L9XUJCvajSvJOrv465DwqMlwPSYuUF0WnDy+qn8B/q4jvGlXGgrRYuQv7xDoxAtSP5HTe6tPz0ukqe9b8/Kk1G5Zpw81ZP2rQ9pNkMQCojOpz0J9gZBpw2nX4oCD7mfRrdcoSbzgScqri5Fjw8kkyQmHklEqG48OIccGcK5zImqSFXHChQkLHB2sb3L/sXKlUMjyQzKL0Ndt0U9XlgibueXOAs7b+QG+6LY2U6Jp2mAXq3OPGWAjVP1O4sGoPA2YBBQDyAeoYZQ8LIWBO0yJVcyD/0D4PXp8nV1LVbHZp8MuabXvQUwEB1YH+xa8YxohTTe+fQ== loekvanhaaster@hotmail.com"
+                },
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD2Psns14jLc06kmxUUgDXs7d2FiNv+DdQfMhaChKLlOWXTsIVAqUUs/WYze+2wDquahTGNfg2obdHC6W1Xm36q2grHmKaYKD+b8lqNiabgc8OVydlyXFv/jNnth/RVhdEAjy9Z0ZSo1qRT57OUyIdWK323wdgEkmEj16MfM0Zs1S36B/m4ZYzbSrwZfqatDoZqmceIM3vXY8ROPlw9sAJV2sIsafVtWgDBUdI8y7PXCAKocoQZfOviT0i93u4YyypYUFQwezwNFoQZ0SHJNCTvkF01x3EFGDqcEwytznQ8ajeTUKuFMrgL2DXc8tdB3RKnFVMGMk4FikdaLLdO0L/jZJLdS63bSw7MTkFJbCxK8doQJ71bASTBr3b6bd/XFVEQT5Hfgj0AwyA+t5B6rgbbPDUan0BnlpTOnOQddCgXd6txwZlqYcUPGlUFMKSjsrpUPVC+Uzf8CZ2zBmrWi3glu6Z+iShsOcRznIT/5XFKbSRMeRPT1IVO1ttO2340bes5y7hXVkLFiV/zPl2fdoZ+R2g1vCQqfjUWLh00pH0FtzuTRuHGNK8YXWgkcx3zHDNfcxl8CUOpbPAdrifKpy/nlq8rf5Bsh9QlcXswsq2BsNMnSR8SBLaTNrcGs2CIY5/0GpY9J58GQdldELkShmrKSwkqPuo6nEWd+i/PNOvCXw== jakobijn.strobbe@hotmail.com"
+                },
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2GO25OtGZ5qygETvbdVFX3kA4+WGGLP4oLiYV50gfPoCQrLBdt11yNa7iX6Qvlbj84SUrKlMdTZ/sneHhDKiFX8y9USC5Njez/6wWm4ZazP54As/kq7Ya0k8BRZlYuJc5Eata/xFNJqaixF7VscqBgnm9+Gh37EAijeoy3MkYbx81rbGbYgcJ/9B9iuudJKHLWe1BAhuac8zBBbDYSky1MYcWagexzDe4UERPxFO4rvnRNLF4ccmtlAmxjWjeD9hxDgD0y4Elnkdu2iRdL6SC73QGELf4QvOVi6IN1XF6FYEPnsDzfkrbvF5sAfoN+ukrbL89vL7iOHL7NOsO8VC2fytC6fLGMKtI2HBJI/3uFeIj29zYwFbv5e27dJeeH+J5Jcw5aAbUu5eUyLN+sZtyPYAMn6rnws6y+C+VHTG5u7Hn8HY7go/BtpOQMZWwl0NshQKVWpGzzf3AIkA6tahGsRv0iuVuGtww0OoXfH7gzySALPV9JeZziL7RwT5yuc99D5AAaI8H0D+GRjpI7RoPdSFNBHJe0/150NWOXEUN58CKNzretTesalOK1eIzgGCW7kqYzvfowv5B6nf52rqJ+gC38oxwRUJwvpEVl8RLH2ojrCC2loEcBl/tFajytBdros/8nSHwmbHtHrDrxW+saAgZVXDW+ruaXRgS1L6YTQ== sjoerdboonstra_626@hotmail.com"
+                }
+              ]							
+            },
+            "provisionVMAgent": true
+          },
+          "secrets": [],
+          "allowExtensionOperations": true
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaces_bullhorn730_name'))]"
+            }
+          ]
         }
-    ]
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2019-09-01",
+      "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/HTTP')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
+      ],
+      "properties": {
+        "protocol": "TCP",
+        "sourcePortRange": "*",
+        "destinationPortRange": "80",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 340,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2019-09-01",
+      "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/HTTPS')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
+      ],
+      "properties": {
+        "protocol": "TCP",
+        "sourcePortRange": "*",
+        "destinationPortRange": "443",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 320,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2019-09-01",
+      "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/SSH')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
+      ],
+      "properties": {
+        "protocol": "TCP",
+        "sourcePortRange": "*",
+        "destinationPortRange": "22",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 300,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkSecurityGroups/securityRules",
+      "apiVersion": "2019-09-01",
+      "name": "[concat(parameters('networkSecurityGroups_BullHorn_nsg_name'), '/BullHornApp')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
+      ],
+      "properties": {
+        "protocol": "TCP",
+        "sourcePortRange": "*",
+        "destinationPortRange": "4200",
+        "sourceAddressPrefix": "*",
+        "destinationAddressPrefix": "*",
+        "access": "Allow",
+        "priority": 360,
+        "direction": "Inbound",
+        "sourcePortRanges": [],
+        "destinationPortRanges": [],
+        "sourceAddressPrefixes": [],
+        "destinationAddressPrefixes": []
+      }
+    },
+    {
+      "type": "Microsoft.Network/virtualNetworks/subnets",
+      "apiVersion": "2019-09-01",
+      "name": "[concat(parameters('virtualNetworks_BullHorn_vnet_name'), '/default')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_BullHorn_vnet_name'))]"
+      ],
+      "properties": {
+        "addressPrefix": "10.0.0.0/24",
+        "delegations": [],
+        "privateEndpointNetworkPolicies": "Enabled",
+        "privateLinkServiceNetworkPolicies": "Enabled"
+      }
+    },
+    {
+      "type": "Microsoft.Network/networkInterfaces",
+      "apiVersion": "2019-09-01",
+      "name": "[parameters('networkInterfaces_bullhorn730_name')]",
+      "location": "westeurope",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_BullHorn_ip_name'))]",
+        "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_BullHorn_vnet_name'), 'default')]",
+        "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAddress": "10.0.0.4",
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_BullHorn_ip_name'))]"
+              },
+              "subnet": {
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_BullHorn_vnet_name'), 'default')]"
+              },
+              "primary": true,
+              "privateIPAddressVersion": "IPv4"
+            }
+          }
+        ],
+        "dnsSettings": {
+          "dnsServers": []
+        },
+        "enableAcceleratedNetworking": false,
+        "enableIPForwarding": false,
+        "networkSecurityGroup": {
+          "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('networkSecurityGroups_BullHorn_nsg_name'))]"
+        }
+      }
+    }
+  ]
 }
