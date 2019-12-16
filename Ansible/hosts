@@ -1,0 +1,5 @@
+[local]
+BullhornPoC_VM      ansible_host=localhost          ansible_user=BullhornPoC
+
+[local:vars]
+ansible_connection = local
