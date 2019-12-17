@@ -17,7 +17,7 @@ jobs:
 
     - uses: actions/checkout@master
 
-    - uses: azure/actions/login@v1
+    - uses: azure/login@v1
       with:
         creds: [${{ secrets.azure_client_id  }},
                 ${{ secrets.azure_client_secret  }},
