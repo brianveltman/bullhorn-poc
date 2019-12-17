@@ -1,21 +1,27 @@
-# This action can be used to create or update a resource group in Azure using the Azure Resource Manager templates 
-# One can also use this to delete a resource group, including all the resources within the resource group.
+name: workflow to create an Azure VM, build and run the bullhorn application through npm with node.js and angular.
 
-#action "Manage Azure Resources" {
-#  uses = "Azure/github-actions/arm@master"
-#  env = {
-#    AZURE_RESOURCE_GROUP = "<Resource Group Name"
-#    AZURE_TEMPLATE_LOCATION = "<URL or Relative path in your repository>"
-#    AZURE_TEMPLATE_PARAM_FILE = "<URL or Relative path in your repository>"
-#  }
-#  needs = ["Azure Login"]
-#}
+on: push
 
-# The GitHub Action for Azure Login wraps the Azure CLI's az login, allowing for Actions to log into Azure.
-#action "Azure Login" {
-#  uses = "Azure/github-actions/login@master"
-#  env = {
-#    AZURE_SUBSCRIPTION = "Subscription Name"
-# }
-#  secrets = ["AZURE_SERVICE_APP_ID", "AZURE_SERVICE_PASSWORD", "AZURE_SERVICE_TENANT"]
-#}
+env:
+  AZURE_RESOURCE_GROUP: Bullhorn-DEV
+  AZURE_ARM_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-template/template.json'
+  AZURE_ARMPARA_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-template/parameters.json'
+
+jobs:
+  build-and-deploy-to-dev:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.az_sp_github }}
+
+    # - run:
+    #     az group deployment create \
+    #     --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+    #     --template-file ${{ env.AZURE_ARM_PATH }} \
+    #     --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+
+    - name: logout
+      run: |
+        az logout
