@@ -9,7 +9,7 @@
     "rtf",
     "odt"
   ],
-  "companyName": "[ COMPANY NAME HERE ]",
+  "companyName": "WorkingTalent",
   "companyLogoPath": "",
   "companyUrl": "",
   "careersUrl": "",
@@ -24,9 +24,9 @@
   "maxUploadSize": 5242880,
   "service": {
     "batchSize": 500,
-    "corpToken": "[ CORP TOKEN HERE ]",
+    "corpToken": "1s00",
     "port": null,
-    "swimlane": "[ SWIMLANE HERE ]",
+    "swimlane": "9",
     "fields": [
       "id",
       "title",
