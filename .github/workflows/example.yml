@@ -24,20 +24,18 @@ jobs:
       with:
         node-version: ${{ env.NODE_VERSION }}
 
-    - name: npm install, build, and test
+    - name: npm install and build
       run: |
         npm install
         npm install @angular-devkit/build-angular@0.13.0
         npm install node-sass --save-dev
-        npm run serve
-      # npm run build --if-present
-      # npm run test --if-present
+        npm run build
     
-    # - name: 'Deploy to Azure WebApp'
-    #   uses: azure/webapps-deploy@v1
-    #   with: 
-    #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
-    #     package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
     # - run:
     #     az group deployment create \
