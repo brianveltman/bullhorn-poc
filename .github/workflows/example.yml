@@ -11,13 +11,13 @@ jobs:
   build-and-deploy-to-dev:
     runs-on: ubuntu-latest
     steps:
-
+    - uses: actions/checkout@master
     - uses: azure/login@v1
       with:
-        creds: [${{ secrets.azure_client_id  }},
+        creds: ${{ secrets.azure_client_id  }},
                 ${{ secrets.azure_client_secret  }},
                 ${{ secrets.azure_subscription_id  }},
-                ${{ secrets.azure_tenant_id  }}]
+                ${{ secrets.azure_tenant_id  }}
 
     # - run:
     #     az group deployment create \
