@@ -1,9 +1,6 @@
 name: workflow to create an Azure VM, build and run the bullhorn application through npm with node.js and angular.
 
-on:
-  pull_request:
-  branches:
-    - master
+on: push
 
 env:
   AZURE_RESOURCE_GROUP: Bullhorn-DEV
