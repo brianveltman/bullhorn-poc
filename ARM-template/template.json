@@ -188,6 +188,10 @@
                 },
                 {
                   "path": "/home/BullhornPoC/.ssh/authorized_keys",
+                  "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCoN5qorKcC0VGCYjyFp3+lw4CbgebHwWQdKkwYF98gMMiLvr+P4CDOtPNIMhRYlDH6U7QJJKvQidSOa8saIcTawXX1tW4H1XIY2CcnYqUL145/uTUMomShRPQ6M4p1P5c1/BiAdBnsB5Bf7omS1Pj/MRzQQt/aB40dvD75v1uYPaOraYN8HMtWav/QSGY4oAFuVaKqLNpKwSXEu/QdlnkHXbmWXZtAS7O/+s+8sFS6WJk67JMNOWsQb5LGS3V0NkQ0zzCkTfKqBdaXONQcKRSECduW53cF9oUyKZD+fOK0Xmz8yhirNzwPzdYtch/oOxHcYZkUQwTmRi6Z1meV4mIC9EtH8aCW1P6mqJte35s4pR+CzNcMzEPUYxNCW0aboyLlsx/kA1qJDIXR98Q0Gx/5Tw+URojtwnmIXrZYEhvPHhN/SmHmhm8w79o9RaReNCuQY32r9eaCdI6rufDFz1/nPVTdtzfJIOuO6gVluCCSSfmwoG5b9yWxQYiOhP47WP6yP3kS+OkssirgOAIG/fgFx60zNR/4ZFZ+rKOtBayMs/+FxzQUpyXCIDLezkFR//dEr+zKzIWHrDnsQFOZLH0QkTuPnCLtbZhZWXW0hIPZY6sCf5Sr9i+UIe4uL72dOEQpWFerBu4SUKGr0KJbSbgLD5Jb6Ebc5WNrm+80c0Tm/Q== jakobijn.strobbe@hotmail.com"
+                },
+                {
+                  "path": "/home/BullhornPoC/.ssh/authorized_keys",
                   "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC2GO25OtGZ5qygETvbdVFX3kA4+WGGLP4oLiYV50gfPoCQrLBdt11yNa7iX6Qvlbj84SUrKlMdTZ/sneHhDKiFX8y9USC5Njez/6wWm4ZazP54As/kq7Ya0k8BRZlYuJc5Eata/xFNJqaixF7VscqBgnm9+Gh37EAijeoy3MkYbx81rbGbYgcJ/9B9iuudJKHLWe1BAhuac8zBBbDYSky1MYcWagexzDe4UERPxFO4rvnRNLF4ccmtlAmxjWjeD9hxDgD0y4Elnkdu2iRdL6SC73QGELf4QvOVi6IN1XF6FYEPnsDzfkrbvF5sAfoN+ukrbL89vL7iOHL7NOsO8VC2fytC6fLGMKtI2HBJI/3uFeIj29zYwFbv5e27dJeeH+J5Jcw5aAbUu5eUyLN+sZtyPYAMn6rnws6y+C+VHTG5u7Hn8HY7go/BtpOQMZWwl0NshQKVWpGzzf3AIkA6tahGsRv0iuVuGtww0OoXfH7gzySALPV9JeZziL7RwT5yuc99D5AAaI8H0D+GRjpI7RoPdSFNBHJe0/150NWOXEUN58CKNzretTesalOK1eIzgGCW7kqYzvfowv5B6nf52rqJ+gC38oxwRUJwvpEVl8RLH2ojrCC2loEcBl/tFajytBdros/8nSHwmbHtHrDrxW+saAgZVXDW+ruaXRgS1L6YTQ== sjoerdboonstra_626@hotmail.com"
                 }
               ]							
