@@ -14,16 +14,16 @@ jobs:
 
     - uses: azure/login@v1
       with:
-        creds: ${{ secrets.azure_client_id  }},
+        creds: [${{ secrets.azure_client_id  }},
                 ${{ secrets.azure_client_secret  }},
                 ${{ secrets.azure_subscription_id  }},
-                ${{ secrets.azure_tenant_id  }}
+                ${{ secrets.azure_tenant_id  }}]
 
-    - run:
-        az group deployment create \
-        --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-        --template-file ${{ env.AZURE_ARM_PATH }} \
-        --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+    # - run:
+    #     az group deployment create \
+    #     --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+    #     --template-file ${{ env.AZURE_ARM_PATH }} \
+    #     --parameters ${{ env.AZURE_ARMPARA_PATH }} 
 
     - name: logout
       run: |
