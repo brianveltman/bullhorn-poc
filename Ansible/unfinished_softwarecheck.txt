@@ -1,0 +1,55 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+
+    - name: Update apt
+      apt: update_cache=yes
+
+    - name: get latest nodejs version
+      uri:
+        url: https://deb.nodesource.com/setup_13.x
+        return_content: yes 
+
+    - name: Install nodejs (state=present is optional)
+      apt:
+        name: nodejs
+        state: present
+
+    - name: Install npm (state=present is optional)
+      apt:
+        name: npm
+        state: present
+        unsafe_perm: yes
+
+    - name: Creates directory
+      file:
+        path: /home/BullhornPoC/bullhorn-poc
+        state: directory
+      become: yes
+
+    - name: Go to the folder and execute command
+      command: chdir= /home/BullhornPoC/bullhorn-poc git clone https://github.com/bullhorn/career-portal.git
+      become: yes
+
+    - name: install node-sass
+      npm:
+        name: node-sass
+        registry: http://registry.npm.taobao.org
+        global: yes
+        unsafe_perm: yes
+
+    - name: instal angular cli
+      npm:
+        name: '@angular/cli'
+        global: yes
+
+
+

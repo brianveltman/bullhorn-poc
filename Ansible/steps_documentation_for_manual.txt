@@ -1,0 +1,27 @@
+Using these commands works for getting the front-end application running.
+
+sudo apt update
+
+sudo apt-get install curl
+
+curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+
+sudo apt-get install nodejs
+
+sudo apt-get install npm
+
+mkdir ["some map name"]
+
+cd ["some map name"]
+
+git clone https://github.com/bullhorn/career-portal.git
+
+cd career-portal
+
+sudo npm install
+
+sudo npm install -g @angular/cli
+
+sudo npm install --unsafe-perm node-sass
+
+sudo npm run serve
