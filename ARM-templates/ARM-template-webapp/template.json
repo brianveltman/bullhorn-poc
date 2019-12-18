@@ -19,7 +19,7 @@
       },
       "linuxFxVersion" : {
           "type": "string",
-          "defaultValue" : "php|7.0",
+          "defaultValue" : "NODE|LTS",
           "metadata": {
             "description": "The Runtime stack of current web app"
           }
@@ -63,7 +63,7 @@
           "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
           "siteConfig": {
               "linuxFxVersion": "[parameters('linuxFxVersion')]",
-              "port": "4000"
+              "WEBSITE_NODE_DEFAULT_VERSION": "12.9"
             }
         }
       }

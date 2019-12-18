@@ -7,7 +7,7 @@ env:
   AZURE_ARM_PATH: 'ARM-templates/ARM-template-webapp/template.json'
   AZURE_ARMPARA_PATH: 'ARM-templates/ARM-template-webapp/parameters.json'
   AZURE_WEBAPP_NAME: Bullhorn-DEV-webapp   
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      
+  AZURE_WEBAPP_PACKAGE_PATH: ''      
   NODE_VERSION: '13.x'               
 
 jobs:
