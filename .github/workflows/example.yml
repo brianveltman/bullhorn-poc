@@ -20,7 +20,7 @@ jobs:
         creds: ${{ secrets.az_sp_github }}
 
     - run:
-        az group deployment create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --template-file ${{ env.AZURE_ARM_PATH }} --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+        az group deployment create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --template-uri ${{ env.AZURE_ARM_PATH }} --parameters ${{ env.AZURE_ARMPARA_PATH }} 
 
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
