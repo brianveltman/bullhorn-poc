@@ -19,7 +19,7 @@
       },
       "linuxFxVersion" : {
           "type": "string",
-          "defaultValue" : "NODE|lts",
+          "defaultValue" : "NODE|12.x",
           "metadata": {
             "description": "The Runtime stack of current web app"
           }
