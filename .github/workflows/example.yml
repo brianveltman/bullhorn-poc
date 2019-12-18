@@ -4,8 +4,8 @@ on: push
 
 env:
   AZURE_RESOURCE_GROUP: Bullhorn-DEV
-  AZURE_ARM_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-templates/ARM-template-webapp/template.json'
-  AZURE_ARMPARA_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-templates/ARM-template-webapp/parameters.json'
+  AZURE_ARM_PATH: 'ARM-templates/ARM-template-webapp/template.json'
+  AZURE_ARMPARA_PATH: 'ARM-templates/ARM-template-webapp/parameters.json'
   AZURE_WEBAPP_NAME: Bullhorn-DEV-webapp   
   AZURE_WEBAPP_PACKAGE_PATH: '.'      
   NODE_VERSION: '13.x'               
@@ -20,7 +20,7 @@ jobs:
         creds: ${{ secrets.az_sp_github }}
 
     - run:
-        az group deployment create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --template-uri ${{ env.AZURE_ARM_PATH }} --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+        az group deployment create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --template-file ${{ env.AZURE_ARM_PATH }} --parameters ${{ env.AZURE_ARMPARA_PATH }} 
 
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
