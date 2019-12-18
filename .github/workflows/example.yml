@@ -4,8 +4,8 @@ on: push
 
 env:
   AZURE_RESOURCE_GROUP: Bullhorn-DEV
-  AZURE_ARM_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-template/template.json'
-  AZURE_ARMPARA_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-template/parameters.json'
+  AZURE_ARM_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-templates/ARM-template-webapp/template.json'
+  AZURE_ARMPARA_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-templates/ARM-template-webapp/parameters.json'
   AZURE_WEBAPP_NAME: Bullhorn-DEV-webapp   
   AZURE_WEBAPP_PACKAGE_PATH: '.'      
   NODE_VERSION: '13.x'               
@@ -19,11 +19,11 @@ jobs:
       with:
         creds: ${{ secrets.az_sp_github }}
 
-    # - run:
-    #     az group deployment create \
-    #     --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-    #     --template-file ${{ env.AZURE_ARM_PATH }} \
-    #     --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+    - run:
+        az group deployment create \
+        --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+        --template-file ${{ env.AZURE_ARM_PATH }} \
+        --parameters ${{ env.AZURE_ARMPARA_PATH }} 
 
     - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
@@ -35,6 +35,8 @@ jobs:
         npm install
         npm install @angular-devkit/build-angular@0.13.0
         npm install node-sass --save-dev
+        nodejs node_modules/node-sass/scripts/install.js
+        npm rebuild node-sass
 
     - name: npm build
       run: |
