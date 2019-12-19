@@ -33,8 +33,6 @@ jobs:
         npm update
         npm install @angular-devkit/build-angular@0.13.0
         sudo npm install --unsafe-perm node-sass
-        node node_modules/node-sass/scripts/install.js
-        npm rebuild node-sass
 
     - name: npm build
       run: |
