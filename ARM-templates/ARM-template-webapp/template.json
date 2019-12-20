@@ -19,7 +19,7 @@
       },
       "linuxFxVersion" : {
           "type": "string",
-          "defaultValue" : "NODE|12.x",
+          "defaultValue" : "NODE|lts",
           "metadata": {
             "description": "The Runtime stack of current web app"
           }
@@ -63,6 +63,7 @@
           "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
           "siteConfig": {
               "linuxFxVersion": "[parameters('linuxFxVersion')]",
+              "nodeVersion": "12.9",
               "WEBSITE_NODE_DEFAULT_VERSION": "12.9"
             }
         }
