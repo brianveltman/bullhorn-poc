@@ -83,6 +83,8 @@
     "tslint": "^5.11.0",
     "typescript": "~3.1.6",
     "webpack-cli": "^3.1.0",
-    "node-sass": "^4.13.0"
+    "node-sass": "^4.13.0",
+    "@actions/core":"^2.2.0",
+    "@actions/github": "2.0.0"
   }
 }
