@@ -30,7 +30,11 @@ jobs:
     - name: npm install
       run: |
         npm install
-        npm install --save-dev --unsafe-perm node-sass
+        npm install rimraf -g
+        rimraf node_modules
+        rimraf package-lock.json
+        npm install node-sass --force
+        npm rebuild node-sass --force
 
     - name: npm build
       run: |
