@@ -39,7 +39,6 @@ jobs:
     - name: npm build
       run: |
         npm run build
-        sudo chmod -R 775 /node_modules
     
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v1
