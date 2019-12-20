@@ -4,8 +4,11 @@ on: push
 
 env:
   AZURE_RESOURCE_GROUP: Bullhorn-DEV
-  AZURE_ARM_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-template/template.json'
-  AZURE_ARMPARA_PATH: 'https://github.com/brianveltman/bullhorn-poc/tree/master/ARM-template/parameters.json'
+  AZURE_ARM_PATH: 'ARM-templates/ARM-template-webapp/template.json'
+  AZURE_ARMPARA_PATH: 'ARM-templates/ARM-template-webapp/parameters.json'
+  AZURE_WEBAPP_NAME: Bullhorn-DEV-webapp   
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      
+  NODE_VERSION: '12.x'               
 
 jobs:
   build-and-deploy-to-dev:
@@ -16,11 +19,29 @@ jobs:
       with:
         creds: ${{ secrets.az_sp_github }}
 
-    # - run:
-    #     az group deployment create \
-    #     --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
-    #     --template-file ${{ env.AZURE_ARM_PATH }} \
-    #     --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+    - run:
+        az group deployment create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --template-file ${{ env.AZURE_ARM_PATH }} --parameters ${{ env.AZURE_ARMPARA_PATH }} 
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: npm install
+      run: |
+        npm install
+        npm install --save-dev --unsafe-perm node-sass --force
+        npm rebuild node-sass --force
+
+    - name: npm build
+      run: |
+        npm run build
+    
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
     - name: logout
       run: |
