@@ -11,7 +11,7 @@
     },
     "sku": {
       "type": "string",
-      "defaultValue": "B1",
+      "defaultValue": "P1v2",
       "metadata": {
         "description": "The SKU of App Service Plan: P1v2 for production and B1 for development "
       }
